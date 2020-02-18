@@ -13,6 +13,8 @@ GLWindow::GLWindow() noexcept : window(nullptr), title(""), width(640), height(4
 }
 
 GLWindow::~GLWindow() noexcept {
+    release();
+    
     if (window) {
         glfwDestroyWindow(window);
     }
@@ -51,4 +53,8 @@ void GLWindow::windowDidLoad() {
 void GLWindow::render(int width, int height) {
 
 
+}
+
+void GLWindow::release() {
+    
 }

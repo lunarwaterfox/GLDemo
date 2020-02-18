@@ -20,6 +20,7 @@ protected:
 
     virtual void windowDidLoad();
     virtual void render(int width, int height);
+    virtual void release();
     
 public:
     GLFWwindow* window;

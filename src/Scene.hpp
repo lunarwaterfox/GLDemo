@@ -6,12 +6,13 @@
 
 class Scene: public GLWindow {
 private:
-    GLint mvp_location;
     GLuint program;
+    GLint vCol;
     
 protected:
     void windowDidLoad();
     void render(int width, int height);
+    void release();
 };
 
 #endif

@@ -1,7 +1,13 @@
-#version 110
+#version 150
 
-varying vec3 color;
+//uniform vec3 triangleColor;
+
+in vec3 color;
+in vec2 tr;
+ 
+out vec4 outColor;
+uniform sampler2D tex;
 
 void main() {
-    gl_FragColor = vec4(color, 1.0);
+    outColor = texture(tex, tr) * vec4(color, 1.0);
 }
