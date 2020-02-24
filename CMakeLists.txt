@@ -11,6 +11,7 @@ enable_testing()
 
 include(cmake/utils.cmake)
 import_glfw()
+import_glm()
 
 #------------------------------------------------------------------------------
 # add utils

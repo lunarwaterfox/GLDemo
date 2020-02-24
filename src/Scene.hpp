@@ -3,11 +3,13 @@
 
 #include <glad/glad.h>
 #include "GLWindow.hpp"
+#include "NormalShaderProgram.hpp"
+#include "BoardElement.hpp"
 
 class Scene: public GLWindow {
 private:
-    GLuint program;
-    GLint vCol;
+    NormalShaderProgram _shader;
+//    BoardElement _board;
     
 protected:
     void windowDidLoad();

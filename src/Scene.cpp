@@ -24,16 +24,10 @@ void Scene::windowDidLoad() {
         0.0f, 0.0f, 0.0f,   1.0f, 1.0f, 1.0f,
         1.0f, 1.0f, 1.0f,   0.0f, 0.0f, 0.0f
     };
-    
-    
-    static const char* vertex_shader_text = Shader::getVertexShader();
-    static const char* fragment_shader_text = Shader::getFragmentShader();
+
 
     GLuint element_buffer, vertex_buffer, vertex_array, texture;
-    GLuint vertex_shader, fragment_shader;
     GLint vpos_location, vcol_location, vtex_location;
-    GLint success;
-    char infoLog[8192];
     
     // VAO
     glGenVertexArrays(1, &vertex_array);
@@ -61,41 +55,7 @@ void Scene::windowDidLoad() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-    // Shader
-    vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertex_shader, 1, &vertex_shader_text, NULL);
-    glCompileShader(vertex_shader);
-    
-    glGetShaderiv(vertex_shader, GL_COMPILE_STATUS, &success);
-    if (!success) {
-        glGetShaderInfoLog(vertex_shader, 512, NULL, infoLog);
-        throw GLFWException(infoLog);
-    }
-    
-    fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragment_shader, 1, &fragment_shader_text, NULL);
-    glCompileShader(fragment_shader);
-    
-    glGetShaderiv(fragment_shader, GL_COMPILE_STATUS, &success);
-    if (!success) {
-        glGetShaderInfoLog(fragment_shader, 512, NULL, infoLog);
-        throw GLFWException(infoLog);
-    }
-
-    // Program
-    program = glCreateProgram();
-    glAttachShader(program, vertex_shader);
-    glAttachShader(program, fragment_shader);
-    glLinkProgram(program);
-    
-    glGetProgramiv(program, GL_LINK_STATUS, &success);
-    if (!success) {
-        glGetProgramInfoLog(program, 512, NULL, infoLog);
-        throw GLFWException(infoLog);
-    }
-      
-    glDeleteShader(vertex_shader);
-    glDeleteShader(fragment_shader);
+    GLuint program = _shader.getProgram();
 
     // vertex location
     vpos_location = glGetAttribLocation(program, "position");
@@ -126,6 +86,7 @@ void Scene::render(int width, int height) {
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     
+    GLuint program = _shader.getProgram();
     glUseProgram(program);
 
 //    glDrawArrays(GL_TRIANGLES, 0, 3);
@@ -135,5 +96,6 @@ void Scene::render(int width, int height) {
 
 void Scene::release() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 }
