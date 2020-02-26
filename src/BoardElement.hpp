@@ -10,7 +10,6 @@ private:
     GLuint _vbo;
     GLuint _ebo;
     GLuint _texture;
-    NormalShaderProgram _shader;
 public:
     BoardElement() noexcept;
     ~BoardElement() noexcept;

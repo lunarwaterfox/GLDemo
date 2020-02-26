@@ -10,6 +10,7 @@ void Scene::windowDidLoad() {
     glBindVertexArray(vao);
     
     _board = new BoardElement();
+    _board2 = new BoardElement();
 }
 
 void Scene::render(int width, int height) {
@@ -17,6 +18,7 @@ void Scene::render(int width, int height) {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     
     _board->render();
+    _board2->render();
 }
 
 void Scene::release() {

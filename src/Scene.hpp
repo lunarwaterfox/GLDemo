@@ -8,6 +8,7 @@
 class Scene: public GLWindow {
 private:
     BoardElement *_board;
+    BoardElement *_board2;
 protected:
     void windowDidLoad();
     void render(int width, int height);

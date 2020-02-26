@@ -1,5 +1,20 @@
 #include "ShaderManager.hpp"
 
+
+ShaderManager::ShaderManager() {
+    
+}
+
+ShaderManager::ShaderManager(const ShaderManager&) {
+    
+    
+}
+
+ShaderManager& ShaderManager::operator=(const ShaderManager&) {
+    return *this;
+}
+
+
 ShaderManager* ShaderManager::sharedManager() {
     static ShaderManager manager;
     
@@ -7,5 +22,5 @@ ShaderManager* ShaderManager::sharedManager() {
 }
 
 GLuint ShaderManager::getNormalProgram() {
-    return 0;
+    return _shader.getProgram();
 }

@@ -1,5 +1,6 @@
 #include <glad/glad.h>
 #include "BoardElement.hpp"
+#include "ShaderManager.hpp"
 
 typedef struct _GLVertex {
     float x, y;
@@ -57,7 +58,7 @@ void BoardElement::render() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     // shader
-    GLuint program = _shader.getProgram();
+    GLuint program = ShaderManager::sharedManager()->getNormalProgram();
 
     // vertex location
     GLint vpos_location = glGetAttribLocation(program, "position");
