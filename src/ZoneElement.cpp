@@ -1,5 +1,5 @@
 #include <glad/glad.h>
-#include "BoardElement.hpp"
+#include "ZoneElement.hpp"
 #include "ShaderManager.hpp"
 
 typedef struct _GLVertex {
@@ -8,26 +8,26 @@ typedef struct _GLVertex {
     float s, t;
 } GLVertex;
 
-BoardElement::BoardElement() noexcept {
+ZoneElement::ZoneElement() noexcept {
     glGenBuffers(1, &_vbo);
     glGenBuffers(1, &_ebo);
     
     glGenTextures(1, &_texture);
 }
 
-BoardElement::~BoardElement() noexcept {
+ZoneElement::~ZoneElement() noexcept {
     glDeleteBuffers(1, &_vbo);
     glDeleteBuffers(1, &_ebo);
 }
 
 
-void BoardElement::render() {
+void ZoneElement::render() {
     // vbo
     GLVertex vertices[] = {
-        {-0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f},
-        { 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 8.0f, 0.0f},
-        { 0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 8.0f, 8.0f},
-        {-0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 8.0f}
+        { 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f},
+        { 0.0f, 0.5f, 1.0f, 1.0f, 1.0f, 8.0f, 0.0f},
+        { 0.5f, 0.5f, 1.0f, 1.0f, 1.0f, 8.0f, 8.0f},
+        { 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 8.0f}
     };
 
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
@@ -44,8 +44,8 @@ void BoardElement::render() {
 
     // texture
     float pixels[] = {
-        0.0f, 0.0f, 0.0f,   1.0f, 1.0f, 1.0f,
-        1.0f, 1.0f, 1.0f,   0.0f, 0.0f, 0.0f
+        1.0f, 1.0f, 1.0f,   1.0f, 1.0f, 1.0f,
+        1.0f, 1.0f, 1.0f,   1.0f, 1.0f, 1.0f,
     };
     
     glActiveTexture(GL_TEXTURE0);
@@ -81,16 +81,21 @@ void BoardElement::render() {
     glUniform1i(tex_location, 0);
 
     // uniform
+    mat4x4 scale = {
+        {2.0f, 0.0f, 0.0f, 0.0f},
+        {0.0f, 2.0f, 0.0f, 0.0f},
+        {0.0f, 0.0f, 2.0f, 0.0f},
+        {0.0f, 0.0f, 0.0f, 1.0f}
+    };
+    
     GLint model_location = glGetUniformLocation(program, "model");
-    glUniformMatrix4fv(model_location, 1, GL_FALSE, (const GLfloat*) _model);
+    glUniformMatrix4fv(model_location, 1, GL_FALSE, (const GLfloat*) scale);
     
     GLint view_location = glGetUniformLocation(program, "view");
     glUniformMatrix4fv(view_location, 1, GL_FALSE, (const GLfloat*) _view);
     
     GLint proj_location = glGetUniformLocation(program, "proj");
     glUniformMatrix4fv(proj_location, 1, GL_FALSE, (const GLfloat*) _proj);
-
-    
 
     // draw
     glUseProgram(program);

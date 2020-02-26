@@ -1,14 +1,19 @@
 #version 150
 
-in vec2 position;
-in vec3 col;
-in vec2 texcoord;
+in vec2 vPos;
+in vec3 vCol;
+in vec2 vTex;
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 proj;
 
 out vec3 color;
-out vec2 tr;
+out vec2 texcord;
 
 void main() {
-    gl_Position = vec4(position, 0.0, 1.0);
-    color = col;
-    tr = texcoord;
+    gl_Position = proj * view * model * vec4(vPos, 0.0, 1.0);
+
+    color = vCol;
+    texcord = vTex;
 }

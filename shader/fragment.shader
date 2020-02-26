@@ -1,13 +1,11 @@
 #version 150
 
-//uniform vec3 triangleColor;
-
 in vec3 color;
-in vec2 tr;
+in vec2 texcord;
  
 out vec4 outColor;
-uniform sampler2D tex;
+uniform sampler2D sampler;
 
 void main() {
-    outColor = texture(tex, tr) * vec4(color, 1.0);
+    outColor = texture(sampler, texcord) * vec4(color, 1.0);
 }

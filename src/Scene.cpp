@@ -10,7 +10,7 @@ void Scene::windowDidLoad() {
     glBindVertexArray(vao);
     
     _board = new BoardElement();
-    _board2 = new BoardElement();
+    _zone = new ZoneElement();
 }
 
 void Scene::render(int width, int height) {
@@ -18,7 +18,7 @@ void Scene::render(int width, int height) {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     
     _board->render();
-    _board2->render();
+    _zone->render();
 }
 
 void Scene::release() {
@@ -27,4 +27,5 @@ void Scene::release() {
     glBindVertexArray(0);
     
     delete _board;
+    delete _zone;
 }
