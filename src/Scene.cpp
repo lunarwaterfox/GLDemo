@@ -17,8 +17,8 @@ void Scene::render(int width, int height) {
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     
-    _board->render();
-    _zone->render();
+    _board->render(width, height);
+    _zone->render(width, height);
 }
 
 void Scene::release() {

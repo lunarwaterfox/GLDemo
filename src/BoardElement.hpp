@@ -14,7 +14,7 @@ public:
     BoardElement() noexcept;
     ~BoardElement() noexcept;
     
-    void render();
+    void render(int width, int height);
 };
 
 #endif

@@ -21,7 +21,7 @@ BoardElement::~BoardElement() noexcept {
 }
 
 
-void BoardElement::render() {
+void BoardElement::render(int width, int height) {
     // vbo
     GLVertex vertices[] = {
         {-0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f},

@@ -13,7 +13,7 @@ public:
     ZoneElement() noexcept;
     ~ZoneElement() noexcept;
     
-    void render();
+    void render(int width, int height);
 };
 
 #endif

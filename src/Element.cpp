@@ -6,6 +6,6 @@ Element::Element() noexcept {
     mat4x4_identity(_proj);
 }
 
-void Element::render() {
+void Element::render(int width, int height) {
     
 }

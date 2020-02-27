@@ -11,7 +11,7 @@ protected:
     mat4x4 _proj;
 public:
     Element() noexcept;
-    virtual void render();
+    virtual void render(int width, int height);
 };
 
 #endif
