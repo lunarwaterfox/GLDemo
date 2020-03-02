@@ -1,6 +1,6 @@
 #version 150
 
-in vec2 vPos;
+in vec3 vPos;
 in vec3 vCol;
 in vec2 vTex;
 
@@ -12,7 +12,7 @@ out vec3 color;
 out vec2 texcord;
 
 void main() {
-    gl_Position = proj * view * model * vec4(vPos, 0.0, 1.0);
+    gl_Position = proj * view * model * vec4(vPos, 1.0);
 
     color = vCol;
     texcord = vTex;
