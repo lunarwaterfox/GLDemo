@@ -12,7 +12,12 @@ out vec3 color;
 out vec2 texcord;
 
 void main() {
-    gl_Position = proj * view * model * vec4(vPos, 1.0);
+    vec4 vecView = view * model * vec4(vPos, 1.0);
+    vecView.x = vecView.x / (1 - vecView.z);
+    vecView.y = vecView.y / (1 - vecView.z);
+    vecView.z = 0;
+
+    gl_Position = vecView;
 
     color = vCol;
     texcord = vTex;
