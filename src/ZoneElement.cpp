@@ -24,10 +24,10 @@ ZoneElement::~ZoneElement() noexcept {
 void ZoneElement::render(int width, int height) {
     // vbo
     GLVertex vertices[] = {
-        { 0.0f,   0.0f,   1.0f, 1.0f, 1.0f, 0.0f, 0.0f},
-        { 0.0f,   100.0f, 1.0f, 1.0f, 1.0f, 8.0f, 0.0f},
-        { 100.0f, 100.0f, 1.0f, 1.0f, 1.0f, 8.0f, 8.0f},
-        { 100.0f, 0.0f,   1.0f, 1.0f, 1.0f, 0.0f, 8.0f}
+        { width - 100.0f,   0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f},
+        { width - 100.0f, 100.0f, 1.0f, 1.0f, 1.0f, 8.0f, 0.0f},
+        { width - 0.0f,   100.0f, 1.0f, 1.0f, 1.0f, 8.0f, 8.0f},
+        { width - 0.0f,     0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 8.0f}
     };
 
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);

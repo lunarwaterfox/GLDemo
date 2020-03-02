@@ -24,10 +24,10 @@ BoardElement::~BoardElement() noexcept {
 void BoardElement::render(int width, int height) {
     // vbo
     GLVertex vertices[] = {
-        {-0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f},
-        { 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 8.0f, 0.0f},
-        { 0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 8.0f, 8.0f},
-        {-0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 8.0f}
+        {0.0f,  height * 0.25f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f},
+        {0.0f,  height * 0.75f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f},
+        {width - 0.0f, height * 0.75f, 0.0f, 0.0f, 1.0f, 4.0f, 1.0f},
+        {width - 0.0f, height * 0.25f, 1.0f, 1.0f, 1.0f, 4.0f, 0.0f}
     };
 
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
@@ -83,6 +83,24 @@ void BoardElement::render(int width, int height) {
     // uniform
     GLint model_location = glGetUniformLocation(program, "model");
     glUniformMatrix4fv(model_location, 1, GL_FALSE, (const GLfloat*) _model);
+    
+    mat4x4 matScale = {
+        {2.0f / width, 0.0f,          0.0f, 0.0f},
+        {0.0f,         2.0f / height, 0.0f, 0.0f},
+        {0.0f,         0.0f,          1.0f, 0.0f},
+        {0.0f,         0.0f,          0.0f, 1.0f}
+    };
+    
+    mat4x4 matOffsset = {
+        {1.0f, 0.0f, 0.0f,  0.0f},
+        {0.0f, 1.0f, 0.0f,  0.0f},
+        {0.0f, 0.0f, 1.0f,  0.0f},
+        {-1.0f, -1.0f, 1.0f,  1.0f}
+    };
+    
+    
+    mat4x4_identity(_view);
+    mat4x4_mul(_view, matOffsset, matScale);
     
     GLint view_location = glGetUniformLocation(program, "view");
     glUniformMatrix4fv(view_location, 1, GL_FALSE, (const GLfloat*) _view);
