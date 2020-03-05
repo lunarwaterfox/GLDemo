@@ -94,43 +94,6 @@ void BoardElement::render(int width, int height, GLuint program) {
     GLint model_location = glGetUniformLocation(program, "model");
     glUniformMatrix4fv(model_location, 1, GL_FALSE, (const GLfloat*) _model);
 
-    // view
-    mat4x4 viewScale = {
-        {2.0f / width, 0.0f,          0.0f, 0.0f},
-        {0.0f,         2.0f / height, 0.0f, 0.0f},
-        {0.0f,         0.0f,          1.0f, 0.0f},
-        {0.0f,         0.0f,          0.0f, 1.0f}
-    };
-
-    mat4x4 viewRotate = {
-        {1.0f, 0.0f,      0.0f, 0.0f},
-        {0.0f, 0.5f,   -0.866f, 0.0f},
-        {0.0f, 0.866f,    0.5f, 0.0f},
-        {0.0f, 0.0f,      0.0f, 1.0f}
-    };
-
-    mat4x4 viewOffset = {
-        {1.0f, 0.0f,  0.0f, 0.0f},
-        {0.0f, 1.0f,  0.0f, 0.0f},
-        {0.0f, 0.0f,  1.0f, 0.0f},
-        {0.0f, 0.0f, -1.0f, 1.0f}
-    };
-
-
-    mat4x4_identity(_view);
-    mat4x4_mul(_view, _view, viewOffset);
-    mat4x4_mul(_view, _view, viewRotate);
-    mat4x4_mul(_view, _view, viewScale);
-
-    GLint view_location = glGetUniformLocation(program, "view");
-    glUniformMatrix4fv(view_location, 1, GL_FALSE, (const GLfloat*) _view);
-
-    // proj
-    GLint proj_location = glGetUniformLocation(program, "proj");
-    glUniformMatrix4fv(proj_location, 1, GL_FALSE, (const GLfloat*) _proj);
-
-
-
     // draw
     glUseProgram(program);
 

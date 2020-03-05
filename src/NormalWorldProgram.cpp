@@ -1,7 +1,10 @@
+#include <linmath.h>
+
 #include "NormalWorldProgram.hpp"
 #include "Shader.hpp"
 #include "GLFWException.hpp"
 
+// static
 GLuint NormalWorldProgram::createProgram() {
     static const char* vertex_shader_text = Shader::getVertexShader();
     static const char* fragment_shader_text = Shader::getFragmentShader();
@@ -47,4 +50,38 @@ GLuint NormalWorldProgram::createProgram() {
     glDeleteShader(fragment_shader);
 
     return program;
+}
+
+//
+NormalWorldProgram::NormalWorldProgram() noexcept: _program(0) {
+
+}
+
+GLuint NormalWorldProgram::getProgram() {
+    if (_program == 0) {
+        _program = createProgram();
+    }
+
+    return _program;
+}
+
+void NormalWorldProgram::bindWatcher(Watcher &watcher) {
+    GLuint program = getProgram();
+
+    mat4x4& _view = watcher.getViewMatrix();
+    mat4x4& _proj = watcher.getProjectMatrix();
+
+    // view
+    GLint view_location = glGetUniformLocation(program, "view");
+    glUniformMatrix4fv(view_location, 1, GL_FALSE, (const GLfloat*) _view);
+
+    // proj
+    GLint proj_location = glGetUniformLocation(program, "proj");
+    glUniformMatrix4fv(proj_location, 1, GL_FALSE, (const GLfloat*) _proj);
+}
+
+NormalWorldProgram::~NormalWorldProgram() noexcept {
+    if (_program != 0) {
+        glDeleteProgram(_program);
+    }
 }

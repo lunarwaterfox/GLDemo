@@ -2,16 +2,17 @@
 #define NORMALWORLDDESC_HPP
 
 #include <glad/glad.h>
+#include "NormalWorldProgram.hpp"
+#include "FovWatcher.hpp"
 
 #include "BoardElement.hpp"
-#include "ZoneElement.hpp"
 
 class NormalWorldDesc {
 private:
-    GLuint _program;
+    NormalWorldProgram _program;
+    FovWatcher _fov;
 
     BoardElement *_board;
-    ZoneElement *_zone;
 public:
     NormalWorldDesc() noexcept;
     ~NormalWorldDesc() noexcept;

@@ -7,5 +7,5 @@ Element::Element() noexcept {
 }
 
 void Element::render(int width, int height) {
-    
+
 }
