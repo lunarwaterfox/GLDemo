@@ -3,13 +3,11 @@
 
 #include <glad/glad.h>
 #include "GLWindow.hpp"
-#include "BoardElement.hpp"
-#include "ZoneElement.hpp"
+#include "NormalWorldDesc.hpp"
 
 class Scene: public GLWindow {
 private:
-    BoardElement *_board;
-    ZoneElement *_zone;
+    NormalWorldDesc _desc;
 protected:
     void windowDidLoad();
     void render(int width, int height);

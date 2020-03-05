@@ -1,6 +1,5 @@
 #include <glad/glad.h>
 #include "ZoneElement.hpp"
-#include "ShaderManager.hpp"
 
 typedef struct _GLVertex {
     float x, y, z;
@@ -21,7 +20,7 @@ ZoneElement::~ZoneElement() noexcept {
 }
 
 
-void ZoneElement::render(int width, int height) {
+void ZoneElement::render(int width, int height, GLuint program) {
     // vbo
     GLVertex vertices[] = {
         {  0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f},
@@ -56,9 +55,6 @@ void ZoneElement::render(int width, int height) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-    // shader
-    GLuint program = ShaderManager::sharedManager()->getNormalProgram();
 
     // vertex location
     GLint vpos_location = glGetAttribLocation(program, "vPos");

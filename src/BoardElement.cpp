@@ -1,6 +1,5 @@
 #include <glad/glad.h>
 #include "BoardElement.hpp"
-#include "ShaderManager.hpp"
 
 typedef struct _GLVertex {
     float x, y, z;
@@ -21,7 +20,7 @@ BoardElement::~BoardElement() noexcept {
 }
 
 
-void BoardElement::render(int width, int height) {
+void BoardElement::render(int width, int height, GLuint program) {
     // vbo
     GLVertex vertices[] = {
         {-4.0f,  1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f},
@@ -57,8 +56,7 @@ void BoardElement::render(int width, int height) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-    // shader
-    GLuint program = ShaderManager::sharedManager()->getNormalProgram();
+
 
     // vertex location
     GLint vpos_location = glGetAttribLocation(program, "vPos");

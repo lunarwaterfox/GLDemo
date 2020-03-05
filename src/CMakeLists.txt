@@ -9,6 +9,5 @@ add_custom_command(
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-add_executable(sample main.cpp GLFWException.cpp GLFWManager.cpp GLWindow.cpp Scene.cpp ${CMAKE_CURRENT_BINARY_DIR}/Shader.cpp ShaderProgram.cpp NormalShaderProgram.cpp BoardElement.cpp ShaderManager.cpp ZoneElement.cpp Element.cpp)
+add_executable(sample main.cpp GLFWException.cpp GLFWManager.cpp GLWindow.cpp Scene.cpp ${CMAKE_CURRENT_BINARY_DIR}/Shader.cpp BoardElement.cpp ZoneElement.cpp Element.cpp NoramlWorldDesc.cpp NormalWorldProgram.cpp)
 target_link_libraries(sample glfw glad glm)
-

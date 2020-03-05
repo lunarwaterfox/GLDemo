@@ -8,24 +8,19 @@ void Scene::windowDidLoad() {
     // VAO
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
-    
-    _board = new BoardElement();
-    _zone = new ZoneElement();
+
+    _desc.createElement();
 }
 
 void Scene::render(int width, int height) {
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     
-    _board->render(width, height);
-    _zone->render(width, height);
+    _desc.render(width, height);
 }
 
 void Scene::release() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-    
-    delete _board;
-    delete _zone;
 }

@@ -3,7 +3,6 @@
 
 #include "Element.hpp"
 #include <glad/glad.h>
-#include "NormalShaderProgram.hpp"
 
 class BoardElement: public Element {
 private:
@@ -13,8 +12,8 @@ private:
 public:
     BoardElement() noexcept;
     ~BoardElement() noexcept;
-    
-    void render(int width, int height);
+
+    void render(int width, int height, GLuint program);
 };
 
 #endif

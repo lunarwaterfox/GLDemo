@@ -12,8 +12,8 @@ private:
 public:
     ZoneElement() noexcept;
     ~ZoneElement() noexcept;
-    
-    void render(int width, int height);
+
+    void render(int width, int height, GLuint program);
 };
 
 #endif
