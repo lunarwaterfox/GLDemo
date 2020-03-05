@@ -4,19 +4,14 @@
 #include <glad/glad.h>
 #include "NormalWorldProgram.hpp"
 #include "FovWatcher.hpp"
-
-#include "BoardElement.hpp"
+#include "BoardObject.hpp"
 
 class NormalWorldDesc {
 private:
     NormalWorldProgram _program;
     FovWatcher _fov;
-
-    BoardElement *_board;
+    BoardObject _board;
 public:
-    NormalWorldDesc() noexcept;
-    ~NormalWorldDesc() noexcept;
-
     void createElement();
     void render(int width, int height);
 };

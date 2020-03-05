@@ -7,6 +7,7 @@
 class NormalWorldProgram {
 private:
     GLuint _program;
+    Watcher* _watcher;
     static GLuint createProgram();
 
 public:
@@ -15,6 +16,7 @@ public:
     GLuint getProgram();
 
     void bindWatcher(Watcher &watcher);
+    void render();
 };
 
 

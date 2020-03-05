@@ -1,4 +1,4 @@
-#include <linmath.h>
+//#include <linmath.h>
 
 #include "NormalWorldProgram.hpp"
 #include "Shader.hpp"
@@ -78,6 +78,12 @@ void NormalWorldProgram::bindWatcher(Watcher &watcher) {
     // proj
     GLint proj_location = glGetUniformLocation(program, "proj");
     glUniformMatrix4fv(proj_location, 1, GL_FALSE, (const GLfloat*) _proj);
+    
+    _watcher = &watcher;
+}
+
+void NormalWorldProgram::render() {
+    _watcher->render(_program);
 }
 
 NormalWorldProgram::~NormalWorldProgram() noexcept {

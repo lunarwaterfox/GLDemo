@@ -1,5 +1,4 @@
-#include <glad/glad.h>
-#include "BoardElement.hpp"
+#include "BoardObject.hpp"
 
 typedef struct _GLVertex {
     float x, y, z;
@@ -7,20 +6,16 @@ typedef struct _GLVertex {
     float s, t;
 } GLVertex;
 
-BoardElement::BoardElement() noexcept {
+void BoardObject::createObject() {
     glGenBuffers(1, &_vbo);
     glGenBuffers(1, &_ebo);
 
     glGenTextures(1, &_texture);
 }
 
-BoardElement::~BoardElement() noexcept {
-    glDeleteBuffers(1, &_vbo);
-    glDeleteBuffers(1, &_ebo);
-}
-
-
-void BoardElement::render(int width, int height, GLuint program) {
+void BoardObject::render(GLuint program) {
+    
+    
     // vbo
     GLVertex vertices[] = {
         {-4.0f,  1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f},
@@ -99,4 +94,9 @@ void BoardElement::render(int width, int height, GLuint program) {
 
     // glDrawArrays(GL_TRIANGLES, 0, 3);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+}
+
+BoardObject::~BoardObject() {
+    glDeleteBuffers(1, &_vbo);
+    glDeleteBuffers(1, &_ebo);
 }
