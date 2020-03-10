@@ -9,26 +9,23 @@ using namespace std;
 
 class GLWindow {
 private:
-
-
     static void keyback(GLFWwindow* window, int key, int scancode, int action, int mods) noexcept;
-    
+
 protected:
-    string title;
-    int width;
-    int height;
+    string _title;
+    int _width;
+    int _height;
+    GLFWwindow* _window;
 
     virtual void windowDidLoad();
-    virtual void render(int width, int height);
+    virtual void renderRect(int width, int height);
     virtual void release();
-    
+
 public:
-    GLFWwindow* window;
-    
     GLWindow() noexcept;
     ~GLWindow() noexcept;
 
-    void makeWindowVisible();
+    void render();
 };
 
 #endif

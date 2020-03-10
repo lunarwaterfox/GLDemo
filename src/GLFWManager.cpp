@@ -4,6 +4,7 @@
 
 #include "GLFWManager.hpp"
 #include "GLFWException.hpp"
+#include "Scene.hpp"
 
 using namespace std;
 
@@ -30,6 +31,7 @@ void GLFWManager::init() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 }
 
-void GLFWManager::makeWindowCurrent(GLWindow& window) {
-    window.makeWindowVisible();
+void GLFWManager::render() {
+    Scene window;
+    window.render();
 }

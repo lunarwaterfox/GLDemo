@@ -1,5 +1,6 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
+#include <iostream>
 
 #include "GLWindow.hpp"
 #include "GLFWException.hpp"
@@ -9,40 +10,42 @@ void GLWindow::keyback(GLFWwindow* window, int key, int scancode, int action, in
         glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
 
-GLWindow::GLWindow() noexcept : window(nullptr), title(""), width(640), height(480) {
+GLWindow::GLWindow() noexcept : _window(nullptr), _title(""), _width(640), _height(480) {
 }
 
 GLWindow::~GLWindow() noexcept {
     release();
-    
-    if (window) {
-        glfwDestroyWindow(window);
+
+    if (_window) {
+        glfwDestroyWindow(_window);
     }
 }
 
-void GLWindow::makeWindowVisible() {
-    window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
-    if (!window) {
+void GLWindow::render() {
+    _window = glfwCreateWindow(_width, _height, _title.c_str(), nullptr, nullptr);
+    if (!_window) {
         throw GLFWException("");
     }
 
-    glfwSetKeyCallback(window, GLWindow::keyback);
- 
-    glfwMakeContextCurrent(window);
+    glfwSetKeyCallback(_window, GLWindow::keyback);
+
+    glfwMakeContextCurrent(_window);
     gladLoadGL();
     glfwSwapInterval(1);
 
     windowDidLoad();
 
-    while (!glfwWindowShouldClose(window)) {
+    while (!glfwWindowShouldClose(_window)) {
         int width, height;
-        glfwGetFramebufferSize(window, &width, &height);
-        
-        render(width, height);
+        glfwGetFramebufferSize(_window, &width, &height);
 
-        glfwSwapBuffers(window);
+        renderRect(width, height);
+
+        glfwSwapBuffers(_window);
         glfwPollEvents();
     }
+
+    release();
 }
 
 void GLWindow::windowDidLoad() {
@@ -50,11 +53,11 @@ void GLWindow::windowDidLoad() {
 
 }
 
-void GLWindow::render(int width, int height) {
+void GLWindow::renderRect(int width, int height) {
 
 
 }
 
 void GLWindow::release() {
-    
+
 }

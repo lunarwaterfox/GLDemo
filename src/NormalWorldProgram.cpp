@@ -65,11 +65,11 @@ GLuint NormalWorldProgram::getProgram() {
     return _program;
 }
 
-void NormalWorldProgram::bindWatcher(Watcher &watcher) {
+void NormalWorldProgram::bindWatcher(const Watcher* watcher) {
     GLuint program = getProgram();
 
-    mat4x4& _view = watcher.getViewMatrix();
-    mat4x4& _proj = watcher.getProjectMatrix();
+    const mat4x4& _view = watcher->getViewMatrix();
+    const mat4x4& _proj = watcher->getProjectMatrix();
 
     // view
     GLint view_location = glGetUniformLocation(program, "view");
@@ -78,8 +78,8 @@ void NormalWorldProgram::bindWatcher(Watcher &watcher) {
     // proj
     GLint proj_location = glGetUniformLocation(program, "proj");
     glUniformMatrix4fv(proj_location, 1, GL_FALSE, (const GLfloat*) _proj);
-    
-    _watcher = &watcher;
+
+    _watcher = watcher;
 }
 
 void NormalWorldProgram::render() {

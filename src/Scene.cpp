@@ -12,10 +12,10 @@ void Scene::windowDidLoad() {
     _desc.createElement();
 }
 
-void Scene::render(int width, int height) {
+void Scene::renderRect(int width, int height) {
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    
+
     _desc.render(width, height);
 }
 

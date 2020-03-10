@@ -7,15 +7,15 @@
 class NormalWorldProgram {
 private:
     GLuint _program;
-    Watcher* _watcher;
     static GLuint createProgram();
 
+    const Watcher* _watcher;
 public:
     NormalWorldProgram() noexcept;
     ~NormalWorldProgram() noexcept;
     GLuint getProgram();
 
-    void bindWatcher(Watcher &watcher);
+    void bindWatcher(const Watcher* watcher);
     void render();
 };
 

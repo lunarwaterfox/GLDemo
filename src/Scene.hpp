@@ -10,7 +10,7 @@ private:
     NormalWorldDesc _desc;
 protected:
     void windowDidLoad();
-    void render(int width, int height);
+    void renderRect(int width, int height);
     void release();
 };
 

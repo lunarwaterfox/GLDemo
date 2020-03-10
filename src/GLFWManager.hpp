@@ -11,7 +11,7 @@ public:
     GLFWManager() noexcept;
     ~GLFWManager() noexcept;
     void init();
-    void makeWindowCurrent(GLWindow& window);
+    void render();
 };
 
 #endif

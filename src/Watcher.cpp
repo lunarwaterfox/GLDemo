@@ -14,15 +14,15 @@ Watcher::Watcher(Watcher& watcher) noexcept {
 Watcher& Watcher::operator=(Watcher& watcher) noexcept {
     mat4x4_dup(this->_view, watcher._view);
     mat4x4_dup(this->_proj, watcher._proj);
-    
+
     return *this;
 }
 
-mat4x4& Watcher::getViewMatrix() {
+const mat4x4& Watcher::getViewMatrix() const {
     return _view;
 }
 
-mat4x4& Watcher::getProjectMatrix() {
+const mat4x4& Watcher::getProjectMatrix() const {
     return _proj;
 }
 
@@ -31,7 +31,7 @@ void Watcher::appendObject(Object& obj) {
     _objects.push_back(&obj);
 }
 
-void Watcher::render(GLuint program) {
+void Watcher::render(GLuint program) const {
     for (auto obj: _objects) {
         obj->render(program);
     }
