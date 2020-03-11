@@ -9,7 +9,7 @@ void GLWindow::keyback(GLFWwindow* window, int key, int scancode, int action, in
         glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
 
-GLWindow::GLWindow() noexcept : _window(nullptr), _title(""), _width(640), _height(480) {
+GLWindow::GLWindow() noexcept : _window(nullptr), _title(""), _width(640), _height(640) {
 }
 
 GLWindow::~GLWindow() noexcept {

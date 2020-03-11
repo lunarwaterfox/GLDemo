@@ -3,7 +3,7 @@
 #include "NormalWorldProgram.hpp"
 
 void NormalWorldDesc::createElement() {
-    vec4 eye = {0.0f, 0.0f, 100.0f, 0.0f};
+    vec4 eye = {0.0f, 500.0f, 1000.0f, 0.0f};
     vec4 center = {0.0f, 0.0f, 0.0f, 0.0f};
     vec4 up = {0.0f, 1.0f, 0.0f, 0.0f};
 
@@ -12,7 +12,7 @@ void NormalWorldDesc::createElement() {
 }
 
 void NormalWorldDesc::render(int width, int height) {
-    _fov.perspective(M_PI / 3, height / width, 40, 200);
+    _fov.perspective(M_PI / 2, (float)height / (float)width, 400, 2000);
     _program.bindWatcher(&_fov);
     _program.render();
 }
