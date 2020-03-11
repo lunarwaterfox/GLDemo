@@ -3,16 +3,16 @@
 #include "NormalWorldProgram.hpp"
 
 void NormalWorldDesc::createElement() {
-    vec4 eye = {0.0f, -50.0f, 50.0f, 1.0f};
-    vec4 center = {0.0f, 0.0f, 0.0f, 1.0f};
-    vec4 up = {0.0f, 1.0f, 0.0f, 1.0f};
+    vec4 eye = {0.0f, 0.0f, 100.0f, 0.0f};
+    vec4 center = {0.0f, 0.0f, 0.0f, 0.0f};
+    vec4 up = {0.0f, 1.0f, 0.0f, 0.0f};
 
     _fov.lookAt(eye, center, up);
-    _fov.appendObject(_board);
+    _fov.appendObject(&_board);
 }
 
 void NormalWorldDesc::render(int width, int height) {
-    _fov.perspective(M_PI, height / width, 40, 200);
+    _fov.perspective(M_PI / 3, height / width, 40, 200);
     _program.bindWatcher(&_fov);
     _program.render();
 }

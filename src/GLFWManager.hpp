@@ -10,8 +10,8 @@ private:
 public:
     GLFWManager() noexcept;
     ~GLFWManager() noexcept;
-    void init();
-    void render();
+    void init() const;
+    void render() const;
 };
 
 #endif

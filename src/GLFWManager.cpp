@@ -1,6 +1,6 @@
 #define GLFW_INCLUDE_NONE
-#include <iostream>
 #include <GLFW/glfw3.h>
+#include <iostream>
 
 #include "GLFWManager.hpp"
 #include "GLFWException.hpp"
@@ -20,7 +20,7 @@ GLFWManager::~GLFWManager() noexcept {
     glfwTerminate();
 }
 
-void GLFWManager::init() {
+void GLFWManager::init() const {
     if (!glfwInit()) {
         throw GLFWException("");
     }
@@ -31,7 +31,7 @@ void GLFWManager::init() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 }
 
-void GLFWManager::render() {
+void GLFWManager::render() const {
     Scene window;
     window.render();
 }

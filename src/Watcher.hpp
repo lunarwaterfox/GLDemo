@@ -14,14 +14,12 @@ protected:
     std::vector<Object *> _objects;
 public:
     Watcher() noexcept;
-    Watcher(Watcher& watcher) noexcept;
-    Watcher& operator=(Watcher& watcher) noexcept;
     ~Watcher() noexcept;
 
     const mat4x4& getViewMatrix() const;
     const mat4x4& getProjectMatrix() const;
 
-    void appendObject(Object& obj);
+    void appendObject(Object* obj);
     void render(GLuint program) const;
 };
 

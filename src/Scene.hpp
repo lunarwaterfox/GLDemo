@@ -11,7 +11,7 @@ private:
 protected:
     void windowDidLoad();
     void renderRect(int width, int height);
-    void release();
+    void release() const;
 };
 
 #endif
