@@ -3,12 +3,13 @@
 #include "NormalWorldProgram.hpp"
 
 void NormalWorldDesc::createElement() {
-    vec4 eye = {0.0f, 500.0f, 1000.0f, 0.0f};
+    vec4 eye = {0.0f, -500.0f, 400.0f, 0.0f};
     vec4 center = {0.0f, 0.0f, 0.0f, 0.0f};
     vec4 up = {0.0f, 1.0f, 0.0f, 0.0f};
 
     _fov.lookAt(eye, center, up);
     _fov.appendObject(&_board);
+    _fov.appendObject(&_player);
 }
 
 void NormalWorldDesc::render(int width, int height) {

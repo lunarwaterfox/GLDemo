@@ -4,10 +4,26 @@
 #include "GLWindow.hpp"
 #include "GLFWException.hpp"
 
-void GLWindow::keyback(GLFWwindow* window, int key, int scancode, int action, int mods) noexcept {
+// static
+
+unordered_map<GLFWwindow *, GLWindow *> GLWindow::_windowMap;
+
+void GLWindow::keyBack(GLFWwindow* window, int key, int scancode, int action, int mods) noexcept {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
+
+void GLWindow::mouseButtonBack(GLFWwindow* window, int button, int action, int mods) noexcept {
+    if (action == GLFW_PRESS && button == GLFW_MOUSE_BUTTON_LEFT) {
+        double xpos, ypos;
+        glfwGetCursorPos(window, &xpos, &ypos);
+
+        GLWindow *callback = _windowMap[window];
+        callback->mouseDown(xpos, ypos);
+    }
+}
+
+
 
 GLWindow::GLWindow() noexcept : _window(nullptr), _title(""), _width(640), _height(640) {
 }
@@ -26,7 +42,10 @@ void GLWindow::render() {
         throw GLFWException("");
     }
 
-    glfwSetKeyCallback(_window, GLWindow::keyback);
+    _windowMap[_window] = this;
+
+    glfwSetKeyCallback(_window, keyBack);
+    glfwSetMouseButtonCallback(_window, mouseButtonBack);
 
     glfwMakeContextCurrent(_window);
     gladLoadGL();
@@ -53,6 +72,11 @@ void GLWindow::windowDidLoad() {
 }
 
 void GLWindow::renderRect(int width, int height) {
+
+
+}
+
+void GLWindow::mouseDown(float x, float y) {
 
 
 }

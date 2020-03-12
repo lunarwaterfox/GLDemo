@@ -1,4 +1,5 @@
-#include "BoardObject.hpp"
+#include "ChessObject.hpp"
+
 
 typedef struct _GLVertex {
     float x, y, z;
@@ -6,22 +7,22 @@ typedef struct _GLVertex {
     float s, t;
 } GLVertex;
 
-void BoardObject::createObject() {
+void ChessObject::createObject() {
     glGenBuffers(1, &_vbo);
     glGenBuffers(1, &_ebo);
 
     glGenTextures(1, &_texture);
 }
 
-void BoardObject::render(GLuint program) {
+void ChessObject::render(GLuint program) {
 
 
     // vbo
     GLVertex vertices[] = {
-        {-4.0f,  1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f},
-        { 4.0f,  1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 4.0f, 1.0f},
-        { 4.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 4.0f, 0.0f},
-        {-4.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f}
+        {-4.0f, -4.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f},
+        { 4.0f, -4.0f, 0.0f, 1.0f, 1.0f, 1.0f, 4.0f, 1.0f},
+        { 0.0f,  4.0f, 0.0f, 1.0f, 1.0f, 1.0f, 4.0f, 0.0f},
+        { 0.0f,  0.0f, 4.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f}
     };
 
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
@@ -29,8 +30,7 @@ void BoardObject::render(GLuint program) {
 
     // ebo
     GLuint elements[] = {
-        0, 1, 2,
-        2, 3, 0
+        0, 1, 2
     };
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo);
@@ -38,8 +38,8 @@ void BoardObject::render(GLuint program) {
 
     // texture
     float pixels[] = {
-        0.0f, 0.0f, 0.0f,   1.0f, 1.0f, 1.0f,
-        1.0f, 1.0f, 1.0f,   0.0f, 0.0f, 0.0f
+        1.0f, 1.0f, 1.0f,   1.0f, 1.0f, 1.0f,
+        1.0f, 1.0f, 1.0f,   1.0f, 1.0f, 1.0f
     };
 
     glActiveTexture(GL_TEXTURE0);
@@ -76,15 +76,22 @@ void BoardObject::render(GLuint program) {
     // uniform
 
     // model
+    mat4x4 modelOffset = {
+        {   1.0f,  0.0f, 0.0f, 0.0f},
+        {   0.0f,  1.0f, 0.0f, 0.0f},
+        {   0.0f,  0.0f, 1.0f, 0.0f},
+        {-350.0f, 50.0f, 0.0f, 1.0f}
+    };
+
     mat4x4 modelScale = {
-        {100.0f, 0.0f,   0.0f, 0.0f},
-        {0.0f,   100.0f, 0.0f, 0.0f},
-        {0.0f,   0.0f,   1.0f, 0.0f},
+        {10.0f,  0.0f,   0.0f, 0.0f},
+        {0.0f,  10.0f,   0.0f, 0.0f},
+        {0.0f,   0.0f,  10.0f, 0.0f},
         {0.0f,   0.0f,   0.0f, 1.0f}
     };
 
     mat4x4_identity(_model);
-    mat4x4_mul(_model, _model, modelScale);
+    mat4x4_mul(_model, modelOffset, modelScale);
 
     GLint model_location = glGetUniformLocation(program, "model");
     glUniformMatrix4fv(model_location, 1, GL_FALSE, (const GLfloat*) _model);
@@ -93,10 +100,10 @@ void BoardObject::render(GLuint program) {
     glUseProgram(program);
 
     // glDrawArrays(GL_TRIANGLES, 0, 3);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 }
 
-BoardObject::~BoardObject() {
+ChessObject::~ChessObject() {
     glDeleteBuffers(1, &_vbo);
     glDeleteBuffers(1, &_ebo);
 }

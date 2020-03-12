@@ -2,6 +2,7 @@
 #include "Shader.hpp"
 #include "Scene.hpp"
 #include "GLFWException.hpp"
+#include <iostream>
 
 void Scene::windowDidLoad() {
     GLuint vao;
@@ -17,6 +18,11 @@ void Scene::renderRect(int width, int height) {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     _desc.render(width, height);
+}
+
+void Scene::mouseDown(float x, float y) {
+    std::cout << x << "-" << y << std::endl;
+
 }
 
 void Scene::release() const {

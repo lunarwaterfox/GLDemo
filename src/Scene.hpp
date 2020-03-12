@@ -11,6 +11,7 @@ private:
 protected:
     void windowDidLoad();
     void renderRect(int width, int height);
+    void mouseDown(float x, float y);
     void release() const;
 };
 
