@@ -4,10 +4,14 @@
 #include <glad/glad.h>
 #include "GLWindow.hpp"
 #include "NormalWorldDesc.hpp"
+#include "Engine.hpp"
 
 class Scene: public GLWindow {
 private:
     NormalWorldDesc _desc;
+    Engine _engine;
+
+    static void engineStateUpdateCallback(EngineState state, void* scene);
 protected:
     void windowDidLoad();
     void renderRect(int width, int height);
