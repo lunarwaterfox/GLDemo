@@ -1,5 +1,4 @@
 #include "FovWatcher.hpp"
-#include <iostream>
 
 void FovWatcher::lookAt(vec4 eye, vec4 center, vec4 up) {
     mat4x4_look_at(_view, eye, center, up);
