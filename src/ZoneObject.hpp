@@ -10,11 +10,17 @@ private:
     GLuint _vbo;
     GLuint _ebo;
     GLuint _texture;
+
+    float _r;
+    float _g;
+    float _b;
 public:
+    ZoneObject();
     ~ZoneObject();
 
     void createObject();
     void render(GLuint program);
+    void zoneShowColor(float r, float g, float b);
 };
 
 #endif

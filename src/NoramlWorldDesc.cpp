@@ -28,3 +28,7 @@ void NormalWorldDesc::render(int width, int height) {
     _program.bindWatcher(&_parallel);
     _program.render();
 }
+
+void NormalWorldDesc::zoneShowColor(float r, float g, float b) {
+    _zone.zoneShowColor(r, g, b);
+}

@@ -20,6 +20,8 @@ private:
 public:
     void createElement();
     void render(int width, int height);
+
+    void zoneShowColor(float r, float g, float b);
 };
 
 

@@ -5,6 +5,7 @@
 #include <iostream>
 
 
+// static
 void Scene::engineStateUpdateCallback(EngineState state, void* context) {;
     Engine* engine = (Engine *)context;
 
@@ -32,6 +33,11 @@ void Scene::engineStateUpdateCallback(EngineState state, void* context) {;
     }
 }
 
+//
+
+Scene::Scene(): _generator(_rd()), _distribution(1, 4) {
+}
+
 void Scene::windowDidLoad() {
     GLuint vao;
     // VAO
@@ -52,8 +58,15 @@ void Scene::renderRect(int width, int height) {
 }
 
 void Scene::mouseDown(float x, float y) {
-    std::cout << "player get 3." << std::endl;
-    _engine.playerGetNumber(3);
+    int num = getRandom();
+
+    std::cout << "player get " << num << "." << std::endl;
+    _engine.playerGetNumber(num);
+    _desc.zoneShowColor(num & 4, num & 2, num & 1);
+}
+
+int Scene::getRandom() {
+    return _distribution(_generator);
 }
 
 void Scene::release() const {

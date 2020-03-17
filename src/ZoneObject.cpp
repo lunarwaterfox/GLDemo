@@ -6,6 +6,11 @@ typedef struct _GLVertex {
     float s, t;
 } GLVertex;
 
+ZoneObject::ZoneObject(): _r(1), _g(1), _b(1) {
+
+}
+
+
 void ZoneObject::createObject() {
     glGenBuffers(1, &_vbo);
     glGenBuffers(1, &_ebo);
@@ -16,10 +21,10 @@ void ZoneObject::createObject() {
 void ZoneObject::render(GLuint program) {
     // vbo
     GLVertex vertices[] = {
-        { -1.0f,  1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f},
-        {  1.0f,  1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 4.0f, 1.0f},
-        {  1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 4.0f, 0.0f},
-        { -1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f}
+        { -1.0f,  1.0f, 0.0f, _r, _g, _b, 0.0f, 1.0f},
+        {  1.0f,  1.0f, 0.0f, _r, _g, _b, 4.0f, 1.0f},
+        {  1.0f, -1.0f, 0.0f, _r, _g, _b, 4.0f, 0.0f},
+        { -1.0f, -1.0f, 0.0f, _r, _g, _b, 0.0f, 0.0f}
     };
 
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
@@ -91,6 +96,12 @@ void ZoneObject::render(GLuint program) {
 
     // glDrawArrays(GL_TRIANGLES, 0, 3);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+}
+
+void ZoneObject::zoneShowColor(float r, float g, float b) {
+    _r = r;
+    _g = g;
+    _b = b;
 }
 
 ZoneObject::~ZoneObject() {
