@@ -16,12 +16,22 @@ private:
     ParallelWatcher _parallel;
     BoardObject _board;
     ChessObject _player;
+    ChessObject _ai;
     ZoneObject _zone;
+
+    boolean _doAnimate;
+    float _animateBegin;
+
+    void initPlayer();
+    void initAI();
 public:
+    NormalWorldDesc();
+    ~NormalWorldDesc();
+
     void createElement();
     void render(int width, int height);
-
     void zoneShowColor(float r, float g, float b);
+    void playerDoAnimate(float start, float end, float delay);
 };
 
 

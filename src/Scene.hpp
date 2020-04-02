@@ -19,6 +19,9 @@ private:
 
     static void engineStateUpdateCallback(EngineState state, void* scene);
     int getRandom();
+
+    void playerAnimateStep(int num);
+    float transToPosition(int p);
 protected:
     void windowDidLoad();
     void renderRect(int width, int height);

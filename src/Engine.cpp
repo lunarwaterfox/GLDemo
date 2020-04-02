@@ -63,3 +63,7 @@ void Engine::aiStepFinish() {
         }
     }
 }
+
+int Engine::getPlayerNumber() {
+  return _playerNumber;
+}

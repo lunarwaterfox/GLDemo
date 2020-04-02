@@ -75,24 +75,6 @@ void ChessObject::render(GLuint program) {
 
     // uniform
 
-    // model
-    mat4x4 modelOffset = {
-        {   1.0f,  0.0f, 0.0f, 0.0f},
-        {   0.0f,  1.0f, 0.0f, 0.0f},
-        {   0.0f,  0.0f, 1.0f, 0.0f},
-        {-350.0f, 50.0f, 0.0f, 1.0f}
-    };
-
-    mat4x4 modelScale = {
-        {10.0f,  0.0f,   0.0f, 0.0f},
-        {0.0f,  10.0f,   0.0f, 0.0f},
-        {0.0f,   0.0f,  10.0f, 0.0f},
-        {0.0f,   0.0f,   0.0f, 1.0f}
-    };
-
-    mat4x4_identity(_model);
-    mat4x4_mul(_model, modelOffset, modelScale);
-
     GLint model_location = glGetUniformLocation(program, "model");
     glUniformMatrix4fv(model_location, 1, GL_FALSE, (const GLfloat*) _model);
 

@@ -63,10 +63,24 @@ void Scene::mouseDown(float x, float y) {
     std::cout << "player get " << num << "." << std::endl;
     _engine.playerGetNumber(num);
     _desc.zoneShowColor(num & 4, num & 2, num & 1);
+
+    playerAnimateStep(num);
 }
 
 int Scene::getRandom() {
     return _distribution(_generator);
+}
+
+void Scene::playerAnimateStep(int num) {
+    int origin = _engine.getPlayerNumber();
+    int end = origin + num;
+    float delay = num;
+
+    _desc.playerDoAnimate(transToPosition(origin), transToPosition(end), delay);
+}
+
+float Scene::transToPosition(int p) {
+    return -350 + p * 100;
 }
 
 void Scene::release() const {

@@ -31,6 +31,8 @@ public:
     void playerStepFinish();
     void aiGetNumber(int num);
     void aiStepFinish();
+
+    int getPlayerNumber();
 };
 
 #endif

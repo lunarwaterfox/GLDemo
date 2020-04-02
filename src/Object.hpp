@@ -11,6 +11,8 @@ public:
     Object() noexcept;
     virtual void createObject();
     virtual void render(GLuint program);
+
+    void setModel(mat4x4 model);
 };
 
 #endif
