@@ -1,6 +1,8 @@
 #ifndef NORMALWORLDDESC_HPP
 #define NORMALWORLDDESC_HPP
 
+#include <chrono>
+
 #include <glad/glad.h>
 #include "NormalWorldProgram.hpp"
 #include "FovWatcher.hpp"
@@ -8,6 +10,8 @@
 #include "ChessObject.hpp"
 #include "ParallelWatcher.hpp"
 #include "ZoneObject.hpp"
+
+using namespace std;
 
 class NormalWorldDesc {
 private:
@@ -19,14 +23,19 @@ private:
     ChessObject _ai;
     ZoneObject _zone;
 
-    boolean _doAnimate;
-    float _animateBegin;
+    GLboolean _doAnimate;
+    chrono::steady_clock::time_point _animateBeginTime;
+    float _animateDuration;
+    float _animateStart;
+    float _animateEnd;
+
 
     void initPlayer();
     void initAI();
+
+    void movePlayer(float progress);
 public:
     NormalWorldDesc();
-    ~NormalWorldDesc();
 
     void createElement();
     void render(int width, int height);

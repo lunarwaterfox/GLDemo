@@ -49,7 +49,7 @@ void GLWindow::render() {
 
     glfwMakeContextCurrent(_window);
     gladLoadGL();
-    glfwSwapInterval(1);
+    glfwSwapInterval(0);
 
     windowDidLoad();
 
